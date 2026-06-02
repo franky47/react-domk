@@ -4,6 +4,4 @@ import { parseAsString, createLoader } from "nuqs/server"
 // client input (useQueryState) and the server-rendered OG image.
 export const memeTextParser = parseAsString.withDefault("")
 
-export const memeSearchParams = { text: memeTextParser }
-
-export const loadMemeSearchParams = createLoader(memeSearchParams)
+export const loadMemeSearchParams = createLoader({ text: memeTextParser })
