@@ -102,6 +102,13 @@ export async function GET(request: Request) {
       width: W,
       height: H,
       fonts: [{ name: "Geist", data: fontData, weight: 700, style: "normal" }],
+      headers: {
+        // The image is a pure function of ?text=, so it never changes for a
+        // given URL. Cache it hard on Vercel's edge to skip recompute on
+        // repeat shares; SWR keeps things warm past the freshness window.
+        "Cache-Control":
+          "public, immutable, no-transform, max-age=31536000, s-maxage=31536000, stale-while-revalidate=86400",
+      },
     },
   )
 }
